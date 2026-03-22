@@ -97,12 +97,11 @@ nav.scrolled { box-shadow:0 2px 24px rgba(30,45,90,0.1); }
 .portfolio-panel.active { display:block; }
 .panel-desc { font-family:'DM Mono',monospace;font-size:11px;color:var(--text-on-dark-muted);letter-spacing:0.1em;margin-bottom:28px; }
 
-.gallery-scroll-wrap { overflow-x:auto;padding-bottom:20px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--gold) rgba(30,45,90,0.4); }
+.gallery-scroll-wrap { overflow-x:auto;padding-bottom:16px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--gold) rgba(30,45,90,0.4); }
 .gallery-scroll-wrap::-webkit-scrollbar { height:2px; }
-.gallery-scroll-wrap::-webkit-scrollbar-track { background:rgba(30,45,90,0.3); }
 .gallery-scroll-wrap::-webkit-scrollbar-thumb { background:var(--gold); }
-.gallery-row { display:flex;gap:10px;width:max-content; }
-.gallery-item { flex-shrink:0;width:256px;overflow:hidden;position:relative;cursor:pointer;border:1px solid rgba(196,150,42,0.15);transition:border-color 0.3s; }
+.gallery-row { display:grid;grid-template-rows:1fr 1fr;grid-auto-flow:column;grid-auto-columns:280px;gap:10px;width:max-content; }
+.gallery-item { overflow:hidden;position:relative;cursor:pointer;border:1px solid rgba(196,150,42,0.15);transition:border-color 0.3s; }
 .gallery-item:hover { border-color:var(--gold); }
 .gallery-item img { width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1),filter 0.3s;filter:saturate(0.88) brightness(0.97); }
 .gallery-item:hover img { transform:scale(1.04);filter:saturate(1.1) brightness(1.0); }
@@ -158,6 +157,22 @@ nav.scrolled { box-shadow:0 2px 24px rgba(30,45,90,0.1); }
 .xhs-m-key { font-family:'DM Mono',monospace;font-size:10px;color:var(--text-on-dark-muted);letter-spacing:0.08em;text-transform:uppercase; }
 .xhs-src-btn { font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;color:var(--text-on-dark-muted);border:1px solid rgba(196,150,42,0.25);background:transparent;padding:5px 12px;cursor:pointer;margin-left:auto;transition:border-color 0.2s,color 0.2s; }
 .xhs-src-btn:hover { border-color:var(--gold);color:var(--gold); }
+
+/* Account card 3D flip */
+.xhs-acc-flip-wrap { perspective:1000px; }
+.xhs-acc-flipper { position:relative;transform-style:preserve-3d;transition:transform 0.7s cubic-bezier(0.4,0,0.2,1); }
+.xhs-acc-flipper.flipped { transform:rotateY(180deg); }
+.xhs-acc-flip-front,
+.xhs-acc-flip-back { backface-visibility:hidden;-webkit-backface-visibility:hidden; }
+.xhs-acc-flip-front { position:relative; }
+.xhs-acc-flip-back { position:absolute;inset:0;transform:rotateY(180deg);background:var(--navy-dark);border:1px solid rgba(196,150,42,0.3);overflow:hidden; }
+.xhs-acc-flip-back img { width:100%;height:100%;display:block;object-fit:cover;object-position:top; }
+.xhs-acc-flip-back-bar { position:absolute;top:8px;right:10px; }
+.xhs-acc-flip-label { display:none; }
+.xhs-acc-flip-back-btn { font-family:'DM Mono',monospace;font-size:14px;color:var(--gold);border:1px solid rgba(196,150,42,0.5);background:rgba(14,22,48,0.7);width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s,border-color 0.2s;padding:0;line-height:1; }
+.xhs-acc-flip-back-btn:hover { background:rgba(196,150,42,0.25);border-color:var(--gold); }
+.acc-verify-btn { font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;color:var(--gold);border:1px solid rgba(196,150,42,0.35);background:rgba(196,150,42,0.08);padding:3px 10px;cursor:pointer;transition:background 0.2s,border-color 0.2s;flex-shrink:0; }
+.acc-verify-btn:hover { background:rgba(196,150,42,0.22);border-color:var(--gold); }
 
 /* XHS */
 .xhs { background:var(--bg-dark); }
@@ -233,11 +248,22 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
 .footer-text { font-family:'DM Mono',monospace;font-size:11px;color:var(--text-on-dark-sub);letter-spacing:0.1em; }
 
 /* LIGHTBOX */
-.lightbox { position:fixed;inset:0;z-index:500;background:rgba(20,31,62,0.96);display:none;align-items:center;justify-content:center;padding:40px; }
-.lightbox.open { display:flex; }
-.lightbox img { max-width:90vw;max-height:85vh;object-fit:contain;box-shadow:0 20px 80px rgba(0,0,0,0.5); }
-.lightbox-close { position:absolute;top:24px;right:36px;font-size:26px;color:var(--text-on-dark);cursor:none;opacity:0.8;transition:opacity 0.2s;font-family:'DM Mono',monospace; }
-.lightbox-close:hover { opacity:1; }
+.lightbox { display:none;position:fixed;inset:0;z-index:8000;background:rgba(14,22,48,0.92);align-items:center;justify-content:center;flex-direction:column;opacity:0;transition:opacity 0.3s; }
+.lightbox img { max-width:90vw;max-height:85vh;border:1px solid rgba(196,150,42,0.3); }
+.lightbox-close { position:absolute;top:24px;right:32px;font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);background:transparent;border:1px solid rgba(196,150,42,0.4);padding:6px 16px;cursor:pointer; }
+
+/* Flip card */
+.flip-card { border-radius:8px;overflow:hidden; }
+.flip-card-inner { width:100%; }
+.flip-card-front { background:rgba(240,237,232,0.05);border:1px solid rgba(196,150,42,0.12);border-radius:8px;padding:14px 16px; }
+.flip-card-back { display:none;background:var(--navy-dark);border:1px solid rgba(196,150,42,0.25);border-radius:8px;padding:10px 16px 16px;position:relative; }
+.flip-card-back img { width:100%;height:auto;display:block;border-radius:4px;margin-top:8px; }
+.flip-close-btn { position:absolute;top:8px;right:10px;font-size:16px;color:var(--text-on-dark-muted);background:none;border:none;cursor:pointer;line-height:1;padding:2px 6px;transition:color 0.2s; }
+.flip-close-btn:hover { color:var(--gold); }
+.flip-card.flipped .flip-card-front { display:none; }
+.flip-card.flipped .flip-card-back { display:block; }
+.xhs-post-cards { display:flex;flex-direction:column;gap:10px;padding-bottom:20px; }
+.flip-card-front { position:relative; }
 
 @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
@@ -289,17 +315,12 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
       <span class="hero-tag">会务统筹</span>
     </div>
     <div class="hero-contact">
-      <div class="hero-contact-item"><span class="label">✉</span> xiebingyingbh@163.com</div>
+      <div class="hero-contact-item"><span class="label">✉</span> <a href="mailto:xiebingyingbh@163.com" style="color:inherit;text-decoration:none;">xiebingyingbh@163.com</a></div>
       <div class="hero-contact-item"><span class="label">☎</span> 18059239170</div>
     </div>
   </div>
   <div class="hero-right">
     <div class="hero-bg-text">Being</div>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-num">28万+</div><div class="hero-stat-label">单条最高浏览</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">200+</div><div class="hero-stat-label">品牌内容发布</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">12万</div><div class="hero-stat-label">SOP文字量</div></div>
-    </div>
   </div>
 </section>
 
@@ -344,7 +365,7 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
   </div>
 
   <div class="portfolio-panel" id="tab-posters">
-    <p class="panel-desc">北航法学院学术讲座 & 行政法新思沙龙系列海报 · 左右滑动 · 点击查看大图</p>
+    <p class="panel-desc">北航法学院学术讲座 & 行政法新思沙龙系列海报（节选）· 左右滑动 · 点击查看大图</p>
     <div class="focus-carousel-wrap">
       <div class="focus-carousel" id="posterCarousel">
         <div class="fc-item poster-fc" onclick="openLightbox('讲座海报1.jpg')"><img src="讲座海报1.jpg" loading="lazy" alt=""></div>
@@ -360,7 +381,7 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
   </div>
 
   <div class="portfolio-panel" id="tab-photos">
-    <p class="panel-desc">北航法律思维讲堂 · 会务摄影作品节选 · 点击查看大图</p>
+    <p class="panel-desc">北航法律思维讲堂 · 会务摄影作品（节选）· 点击查看大图</p>
     <div class="focus-carousel-wrap">
       <div class="focus-carousel" id="photoCarousel">
         <div class="fc-item photo-fc" onclick="openLightbox('会场照片.jpg')"><img src="会场照片.jpg" loading="lazy" alt=""></div>
@@ -372,6 +393,173 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
         <div class="fc-item photo-fc" onclick="openLightbox('个人照片6.jpg')"><img src="个人照片6.jpg" loading="lazy" alt=""></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- XHS -->
+<section class="section xhs" id="xhs">
+  <div class="section-label">Social Media</div>
+  <h2 class="section-title">小红书运营数据</h2>
+  <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-on-light-muted);letter-spacing:0.1em;margin-top:-40px;margin-bottom:36px;">点击账号名称展开 · 查看详细数据</p>
+  <div class="xhs-accounts-new">
+
+    <div class="xhs-acc xhs-acc-flip-wrap" id="acc-being">
+      <div class="xhs-acc-flipper" id="flipper-being">
+        <div class="xhs-acc-flip-front">
+          <div class="xhs-acc-header" onclick="toggleXhs('acc-being')">
+            <div>
+              <div class="xhs-acc-name" style="display:flex;align-items:center;gap:10px;">Being <button class="acc-verify-btn" onclick="event.stopPropagation();flipAccCard('being')">账号截图 ◈</button></div>
+              <div class="xhs-acc-bio">个人成长感悟 · 675粉丝 · 2.1万获赞收藏</div>
+              <div class="xhs-acc-bio" style="margin-top:4px;color:var(--text-on-dark-muted);">小红书号：392673769</div>
+            </div>
+            <div class="xhs-acc-toggle">+</div>
+          </div>
+          <div class="xhs-acc-body"><div class="xhs-acc-inner">
+        <div class="xhs-post-cards">
+          <div class="flip-card" id="fc-being-1">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="xhs-post-card-title">导师骂人真的很有水平</div>
+                <div class="xhs-post-card-metrics">
+                  <div class="xhs-m"><div class="xhs-m-val">95,370</div><div class="xhs-m-key">👁 浏览</div></div>
+                  <div class="xhs-m"><div class="xhs-m-val">12,263</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+                  <button class="xhs-src-btn" onclick="event.stopPropagation();flipCard('fc-being-1')">查看数据来源</button>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <button class="flip-close-btn" onclick="event.stopPropagation();flipCard('fc-being-1')">↩</button>
+                <img src="小红书号1-数据1.png" alt="数据来源">
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" id="fc-being-2">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="xhs-post-card-title">宝宝，其实你一直都有一种不安感</div>
+                <div class="xhs-post-card-metrics">
+                  <div class="xhs-m"><div class="xhs-m-val">14,433</div><div class="xhs-m-key">👁 浏览</div></div>
+                  <div class="xhs-m"><div class="xhs-m-val">3,698</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+                  <button class="xhs-src-btn" onclick="event.stopPropagation();flipCard('fc-being-2')">查看数据来源</button>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <button class="flip-close-btn" onclick="event.stopPropagation();flipCard('fc-being-2')">↩</button>
+                <img src="小红书号1-数据2.png" alt="数据来源">
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" id="fc-being-3">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="xhs-post-card-title">这是躲在我短发下三年的耳机兼mp3</div>
+                <div class="xhs-post-card-metrics">
+                  <div class="xhs-m"><div class="xhs-m-val">31,291</div><div class="xhs-m-key">👁 浏览</div></div>
+                  <div class="xhs-m"><div class="xhs-m-val">3,754</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+                  <button class="xhs-src-btn" onclick="event.stopPropagation();flipCard('fc-being-3')">查看数据来源</button>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <button class="flip-close-btn" onclick="event.stopPropagation();flipCard('fc-being-3')">↩</button>
+                <img src="小红书号1-数据3.png" alt="数据来源">
+              </div>
+            </div>
+          </div>
+        </div>
+          </div></div>
+        </div><!-- /flip-front -->
+        <div class="xhs-acc-flip-back">
+          <img src="小红书号1.png" alt="Being 账号信息">
+          <div class="xhs-acc-flip-back-bar">
+            <button class="xhs-acc-flip-back-btn" onclick="flipAccCard('being')">↩</button>
+          </div>
+        </div>
+      </div><!-- /flipper -->
+    </div>
+
+    <div class="xhs-acc xhs-acc-flip-wrap" id="acc-yituan">
+      <div class="xhs-acc-flipper" id="flipper-yituan">
+        <div class="xhs-acc-flip-front">
+          <div class="xhs-acc-header" onclick="toggleXhs('acc-yituan')">
+            <div>
+              <div class="xhs-acc-name" style="display:flex;align-items:center;gap:10px;">一团浆糊 <button class="acc-verify-btn" onclick="event.stopPropagation();flipAccCard('yituan')">账号截图 ◈</button></div>
+              <div class="xhs-acc-bio">读研经验分享 · 63粉丝 · 2.9万获赞收藏</div>
+              <div class="xhs-acc-bio" style="margin-top:4px;color:var(--text-on-dark-muted);">小红书号：115374505</div>
+            </div>
+            <div class="xhs-acc-toggle">+</div>
+          </div>
+          <div class="xhs-acc-body"><div class="xhs-acc-inner">
+        <div class="xhs-post-cards">
+          <div class="flip-card" id="fc-yt-1">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="xhs-post-card-title">研究生你记住了</div>
+                <div class="xhs-post-card-metrics">
+                  <div class="xhs-m"><div class="xhs-m-val">287,093</div><div class="xhs-m-key">👁 浏览</div></div>
+                  <div class="xhs-m"><div class="xhs-m-val">28,579</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+                  <button class="xhs-src-btn" onclick="event.stopPropagation();flipCard('fc-yt-1')">查看数据来源</button>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <button class="flip-close-btn" onclick="event.stopPropagation();flipCard('fc-yt-1')">↩</button>
+                <img src="小红书号2-数据2.png" alt="数据来源">
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" id="fc-yt-2">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="xhs-post-card-title">不会约时间的研究生看过来</div>
+                <div class="xhs-post-card-metrics">
+                  <div class="xhs-m"><div class="xhs-m-val">16,991</div><div class="xhs-m-key">👁 浏览</div></div>
+                  <div class="xhs-m"><div class="xhs-m-val">251</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+                  <button class="xhs-src-btn" onclick="event.stopPropagation();flipCard('fc-yt-2')">查看数据来源</button>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <button class="flip-close-btn" onclick="event.stopPropagation();flipCard('fc-yt-2')">↩</button>
+                <img src="小红书号2-数据1.png" alt="数据来源">
+              </div>
+            </div>
+          </div>
+        </div>
+          </div></div>
+        </div><!-- /flip-front -->
+        <div class="xhs-acc-flip-back">
+          <img src="小红书号2.png" alt="一团浆糊 账号信息">
+          <div class="xhs-acc-flip-back-bar">
+            <button class="xhs-acc-flip-back-btn" onclick="flipAccCard('yituan')">↩</button>
+          </div>
+        </div>
+      </div><!-- /flipper -->
+    </div>
+
+    <div class="xhs-acc" id="acc-friend">
+      <div class="xhs-acc-header" onclick="toggleXhs('acc-friend')">
+        <div><div class="xhs-acc-name">协助发布</div><div class="xhs-acc-bio">朋友账号 · 单条内容</div></div>
+        <div class="xhs-acc-toggle">+</div>
+      </div>
+      <div class="xhs-acc-body"><div class="xhs-acc-inner">
+        <div class="xhs-post-cards">
+          <div class="flip-card" id="fc-friend-1">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="xhs-post-card-title">米哈游哑巴不许做游戏</div>
+                <div class="xhs-post-card-metrics">
+                  <div class="xhs-m"><div class="xhs-m-val">42,519</div><div class="xhs-m-key">👁 浏览</div></div>
+                  <div class="xhs-m"><div class="xhs-m-val">2,068</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+                  <button class="xhs-src-btn" onclick="event.stopPropagation();flipCard('fc-friend-1')">查看数据来源</button>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <button class="flip-close-btn" onclick="event.stopPropagation();flipCard('fc-friend-1')">↩</button>
+                <img src="小红书号3-单条数据.png" alt="数据来源">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
   </div>
 </section>
 
@@ -389,97 +577,6 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
     <div class="skillmap-row"><div class="skill-l"><div class="skill-l-title">SOP / 流程文书</div><div class="skill-l-sub">标准化流程设计</div></div><div class="skillmap-mid-cell"><div class="skillmap-arrow">→</div></div><div class="skill-r"><div class="skill-r-title">运营标准化</div><div class="skill-r-sub">建立可复用的内容生产流程</div></div></div>
     <div style="height:60px;"></div>
   </div>
-
-<!-- XHS -->
-<section class="section xhs" id="xhs">
-  <div class="section-label">Social Media</div>
-  <h2 class="section-title">小红书运营数据</h2>
-  <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-on-light-muted);letter-spacing:0.1em;margin-top:-40px;margin-bottom:36px;">点击账号名称展开 · 查看详细数据</p>
-  <div class="xhs-accounts-new">
-
-    <div class="xhs-acc" id="acc-being">
-      <div class="xhs-acc-header" onclick="toggleXhs('acc-being')">
-        <div><div class="xhs-acc-name">Being</div><div class="xhs-acc-bio">个人成长感悟 · 675粉丝 · 2.1万获赞收藏</div></div>
-        <div class="xhs-acc-toggle">+</div>
-      </div>
-      <div class="xhs-acc-body"><div class="xhs-acc-inner">
-        <div class="xhs-post-cards">
-          <div class="xhs-post-card">
-            <div class="xhs-post-card-title">导师骂人真的很有水平</div>
-            <div class="xhs-post-card-metrics">
-              <div class="xhs-m"><div class="xhs-m-val">95,370</div><div class="xhs-m-key">👁 浏览</div></div>
-              <div class="xhs-m"><div class="xhs-m-val">12,263</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
-              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号1-数据1.png')">查看数据来源</button>
-            </div>
-          </div>
-          <div class="xhs-post-card">
-            <div class="xhs-post-card-title">宝宝，其实你一直都有一种不安感</div>
-            <div class="xhs-post-card-metrics">
-              <div class="xhs-m"><div class="xhs-m-val">14,433</div><div class="xhs-m-key">👁 浏览</div></div>
-              <div class="xhs-m"><div class="xhs-m-val">3,698</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
-              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号1-数据2.png')">查看数据来源</button>
-            </div>
-          </div>
-          <div class="xhs-post-card">
-            <div class="xhs-post-card-title">这是躲在我短发下三年的耳机兼mp3</div>
-            <div class="xhs-post-card-metrics">
-              <div class="xhs-m"><div class="xhs-m-val">31,291</div><div class="xhs-m-key">👁 浏览</div></div>
-              <div class="xhs-m"><div class="xhs-m-val">3,754</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
-              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号1-数据3.png')">查看数据来源</button>
-            </div>
-          </div>
-        </div>
-      </div></div>
-    </div>
-
-    <div class="xhs-acc" id="acc-yituan">
-      <div class="xhs-acc-header" onclick="toggleXhs('acc-yituan')">
-        <div><div class="xhs-acc-name">一团浆糊</div><div class="xhs-acc-bio">读研经验分享 · 63粉丝 · 2.9万获赞收藏</div></div>
-        <div class="xhs-acc-toggle">+</div>
-      </div>
-      <div class="xhs-acc-body"><div class="xhs-acc-inner">
-        <div class="xhs-post-cards">
-          <div class="xhs-post-card">
-            <div class="xhs-post-card-title">研究生你记住了</div>
-            <div class="xhs-post-card-metrics">
-              <div class="xhs-m"><div class="xhs-m-val">287,093</div><div class="xhs-m-key">👁 浏览</div></div>
-              <div class="xhs-m"><div class="xhs-m-val">28,579</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
-              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号2-数据2.png')">查看数据来源</button>
-            </div>
-          </div>
-          <div class="xhs-post-card">
-            <div class="xhs-post-card-title">不会约时间的研究生看过来</div>
-            <div class="xhs-post-card-metrics">
-              <div class="xhs-m"><div class="xhs-m-val">16,991</div><div class="xhs-m-key">👁 浏览</div></div>
-              <div class="xhs-m"><div class="xhs-m-val">251</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
-              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号2-数据1.png')">查看数据来源</button>
-            </div>
-          </div>
-        </div>
-      </div></div>
-    </div>
-
-    <div class="xhs-acc" id="acc-friend">
-      <div class="xhs-acc-header" onclick="toggleXhs('acc-friend')">
-        <div><div class="xhs-acc-name">协助发布</div><div class="xhs-acc-bio">朋友账号 · 单条内容</div></div>
-        <div class="xhs-acc-toggle">+</div>
-      </div>
-      <div class="xhs-acc-body"><div class="xhs-acc-inner">
-        <div class="xhs-post-cards">
-          <div class="xhs-post-card">
-            <div class="xhs-post-card-title">米哈游哑巴不许做游戏</div>
-            <div class="xhs-post-card-metrics">
-              <div class="xhs-m"><div class="xhs-m-val">42,519</div><div class="xhs-m-key">👁 浏览</div></div>
-              <div class="xhs-m"><div class="xhs-m-val">2,068</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
-              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号3-单条数据.png')">查看数据来源</button>
-            </div>
-          </div>
-        </div>
-      </div></div>
-    </div>
-
-  </div>
-</section>
 
 <!-- EXPERIENCE -->
 <section class="section experience" id="experience">
@@ -530,7 +627,7 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
     <div class="contact-sub">2026届春季校招 · 北京</div>
   </div>
   <div class="contact-right">
-    <div class="contact-item"><div class="contact-icon">✉</div><div><div class="contact-type">Email</div><div class="contact-value">xiebingyingbh@163.com</div></div></div>
+    <div class="contact-item"><div class="contact-icon">✉</div><div><div class="contact-type">Email</div><div class="contact-value"><a href="mailto:xiebingyingbh@163.com" style="color:inherit;text-decoration:none;">xiebingyingbh@163.com</a></div></div></div>
     <div class="contact-item"><div class="contact-icon">☎</div><div><div class="contact-type">Phone</div><div class="contact-value">18059239170</div></div></div>
   </div>
 </section>
@@ -541,8 +638,8 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
 </footer>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close">✕</span>
-  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-close" onclick="event.stopPropagation();closeLightbox()">↩</button>
+  <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
 </div>
 
 <script>
@@ -570,6 +667,7 @@ function initCarousel(id){
   const c=document.getElementById(id);
   if(!c||c._init) return;
   c._init=true;
+  c.style.padding='28px calc(50% - 130px)';
   function update(){
     const cw=c.offsetWidth,cl=c.scrollLeft,center=cl+cw/2;
     c.querySelectorAll('.fc-item').forEach(item=>{
@@ -595,10 +693,41 @@ function toggleXhs(id){
   document.querySelectorAll('.xhs-acc.open').forEach(a=>a.classList.remove('open'));
   if(!isOpen) el.classList.add('open');
 }
-function openLightbox(src){document.getElementById('lightboxImg').src=src;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
-function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
-document.querySelector('.exp-item').classList.add('open');
+function flipAccCard(id) {
+  const flipper = document.getElementById('flipper-' + id);
+  const acc = flipper.closest('.xhs-acc');
+  const isFlipped = flipper.classList.contains('flipped');
+  if (!isFlipped) {
+    // Collapse the accordion first, wait for it to close, then flip
+    acc.classList.remove('open');
+    setTimeout(() => { flipper.classList.add('flipped'); }, 350);
+  } else {
+    flipper.classList.remove('flipped');
+  }
+}
+function flipCard(id){
+  const card=document.getElementById(id);
+  const front=card.querySelector('.flip-card-front');
+  const back=card.querySelector('.flip-card-back');
+  if(back.style.display==='block'){
+    back.style.display='none';
+    front.style.display='block';
+  } else {
+    front.style.display='none';
+    back.style.display='block';
+  }
+}
+function openLightbox(src){
+  const lb=document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src=src;
+  lb.style.display='flex';
+  setTimeout(()=>lb.style.opacity='1',10);
+}
+function closeLightbox(){
+  const lb=document.getElementById('lightbox');
+  lb.style.opacity='0';
+  setTimeout(()=>{ lb.style.display='none'; },300);
+}
 </script>
 </body>
 </html>
