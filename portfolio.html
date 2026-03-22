@@ -26,12 +26,7 @@
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body { background:var(--bg); color:var(--navy); font-family:'Noto Serif SC',serif; font-weight:300; line-height:1.8; overflow-x:hidden; }
-.cursor,.cursor-ring { display:none; }
-@media (hover:hover) and (pointer:fine) {
-  body { cursor:none; }
-  .cursor,.cursor-ring { display:block; }
-}
+body { background:var(--bg); color:var(--navy); font-family:'Noto Serif SC',serif; font-weight:300; line-height:1.8; cursor:none; }
 
 /* Cursor */
 .cursor { width:9px;height:9px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%); }
@@ -279,58 +274,30 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
   .hero { grid-template-columns:1fr; }
   .hero-right { display:none; }
   .hero-left { padding:100px 24px 60px; }
-  .hero-contact-item { word-break:break-all; }
   .section { padding:60px 24px; }
-  .section-title { margin-bottom:36px; }
   .about-grid { grid-template-columns:1fr;gap:40px; }
-  .portfolio-tabs { flex-wrap:wrap; }
-  .portfolio-tab { flex:1 1 calc(50% - 2px); text-align:center; padding:10px 14px; }
-  .gallery-row { grid-auto-columns:220px; gap:8px; }
-  .focus-carousel { padding:0 16px; gap:12px; scroll-snap-type:x mandatory; }
-  .fc-item { scroll-snap-align:center; }
-  .fc-item.poster-fc { width:170px; }
-  .fc-item.photo-fc { width:220px; }
-  .xhs-accounts,.xhs-posts,.practice-grid,.xhs-accounts-new { grid-template-columns:1fr; }
-  .xhs-accounts-new { gap:12px; }
-  .xhs-acc-header { padding:18px; align-items:flex-start; gap:12px; }
-  .xhs-acc-name { font-size:18px; line-height:1.4; flex-wrap:wrap; }
-  .xhs-acc-bio { line-height:1.8; }
-  .xhs-post-card { padding:14px; }
-  .xhs-post-card-metrics { gap:14px; align-items:flex-start; }
-  .xhs-src-btn { margin-left:0; }
-  .skillmap-col-header { display:none; }
-  .skillmap-row { grid-template-columns:1fr; gap:8px; }
-  .skillmap-mid-cell { padding:4px 0; }
-  .exp-header { grid-template-columns:1fr; padding:22px 20px; gap:12px; }
-  .exp-company { font-size:16px; line-height:1.6; }
-  .exp-right { width:100%; justify-content:space-between; gap:12px; }
-  .exp-body-inner { padding:22px 20px 24px; }
-  .exp-point { grid-template-columns:1fr; gap:8px; }
-  .exp-tag { width:fit-content; }
+  .xhs-accounts,.xhs-posts,.practice-grid { grid-template-columns:1fr; }
   .photo-grid { grid-template-columns:1fr 1fr;grid-template-rows:auto; }
   .photo-item:first-child { grid-row:auto;grid-column:1/3; }
   .photo-item img { min-height:200px; }
-  .practice-card { padding:28px 22px; }
-  .contact { padding:60px 24px; flex-direction:column; align-items:flex-start; }
+  .contact { padding:60px 24px; }
   footer { padding:20px 24px;flex-direction:column;gap:8px;text-align:center; }
-}
-
-@media (max-width:640px) {
-  nav { padding:14px 20px; }
-  .nav-name { font-size:14px; }
-  .hero-left { padding:92px 20px 48px; }
-  .hero-name { font-size:44px; }
-  .hero-tags { gap:8px; }
-  .hero-tag { padding:4px 10px; }
-  .section { padding:48px 20px; }
-  .portfolio-tab { flex:1 1 100%; }
-  .gallery-row { grid-auto-columns:180px; }
-  .focus-carousel { padding:0 8px; }
-  .fc-item.poster-fc { width:150px; }
-  .fc-item.photo-fc { width:200px; }
-  .xhs-acc-toggle, .exp-toggle { flex-shrink:0; }
-  .contact-right { width:100%; }
-  .contact-item { align-items:flex-start; }
+  /* Mobile fixes */
+  .xhs-accounts-new { grid-template-columns:1fr; }
+  .xhs-acc-name { font-size:16px;white-space:normal;display:flex;align-items:center;gap:8px;flex-wrap:wrap; }
+  .xhs-acc-header { padding:18px 18px;gap:10px; }
+  .xhs-acc-header > div:first-child { min-width:0;flex:1; }
+  .xhs-acc-bio { white-space:normal;word-break:break-all; }
+  .acc-verify-btn { font-size:8px;padding:2px 7px; }
+  .exp-header { padding:20px 18px;display:flex;flex-direction:column;align-items:flex-start;gap:10px; }
+  .exp-company { font-size:15px;white-space:normal; }
+  .exp-right { width:100%;justify-content:space-between; }
+  .exp-body-inner { padding:18px 18px 22px; }
+  .exp-point { grid-template-columns:1fr;gap:8px; }
+  .skillmap-row { grid-template-columns:1fr;gap:6px; }
+  .skillmap-mid-cell { display:none; }
+  .skillmap-col-header { grid-template-columns:1fr; }
+  .skillmap-col-header .hdr-mid { display:none; }
 }
 </style>
 </head>
@@ -364,7 +331,7 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
       <span class="hero-tag">会务统筹</span>
     </div>
     <div class="hero-contact">
-      <div class="hero-contact-item"><span class="label">✉</span> <a href="mailto:xiebingyingbh@163.com" style="color:inherit;text-decoration:none;">xiebingyingbh@163.com</a></div>
+      <div class="hero-contact-item"><span class="label">✉</span> <a href="/cdn-cgi/l/email-protection#cfb7a6aaada6a1a8b6a6a1a8ada78ffef9fce1aca0a2" style="color:inherit;text-decoration:none;"><span class="__cf_email__" data-cfemail="8cf4e5e9eee5e2ebf5e5e2ebeee4ccbdbabfa2efe3e1">[email&#160;protected]</span></a></div>
       <div class="hero-contact-item"><span class="label">☎</span> 18059239170</div>
     </div>
   </div>
@@ -515,14 +482,14 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
           </div>
         </div>
           </div></div>
-        </div><!-- /flip-front -->
+        </div>
         <div class="xhs-acc-flip-back">
           <img src="小红书号1.png" alt="Being 账号信息">
           <div class="xhs-acc-flip-back-bar">
             <button class="xhs-acc-flip-back-btn" onclick="flipAccCard('being')">↩</button>
           </div>
         </div>
-      </div><!-- /flipper -->
+      </div>
     </div>
 
     <div class="xhs-acc xhs-acc-flip-wrap" id="acc-yituan">
@@ -572,14 +539,14 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
           </div>
         </div>
           </div></div>
-        </div><!-- /flip-front -->
+        </div>
         <div class="xhs-acc-flip-back">
           <img src="小红书号2.png" alt="一团浆糊 账号信息">
           <div class="xhs-acc-flip-back-bar">
             <button class="xhs-acc-flip-back-btn" onclick="flipAccCard('yituan')">↩</button>
           </div>
         </div>
-      </div><!-- /flipper -->
+      </div>
     </div>
 
     <div class="xhs-acc" id="acc-friend">
@@ -626,7 +593,6 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
     <div class="skillmap-row"><div class="skill-l"><div class="skill-l-title">SOP / 流程文书</div><div class="skill-l-sub">标准化流程设计</div></div><div class="skillmap-mid-cell"><div class="skillmap-arrow">→</div></div><div class="skill-r"><div class="skill-r-title">运营标准化</div><div class="skill-r-sub">建立可复用的内容生产流程</div></div></div>
     <div style="height:60px;"></div>
   </div>
-</section>
 
 <!-- EXPERIENCE -->
 <section class="section experience" id="experience">
@@ -677,7 +643,7 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
     <div class="contact-sub">2026届春季校招 · 北京</div>
   </div>
   <div class="contact-right">
-    <div class="contact-item"><div class="contact-icon">✉</div><div><div class="contact-type">Email</div><div class="contact-value"><a href="mailto:xiebingyingbh@163.com" style="color:inherit;text-decoration:none;">xiebingyingbh@163.com</a></div></div></div>
+    <div class="contact-item"><div class="contact-icon">✉</div><div><div class="contact-type">Email</div><div class="contact-value"><a href="/cdn-cgi/l/email-protection#dfa7b6babdb6b1b8a6b6b1b8bdb79feee9ecf1bcb0b2" style="color:inherit;text-decoration:none;"><span class="__cf_email__" data-cfemail="562e3f33343f38312f3f3831343e166760657835393b">[email&#160;protected]</span></a></div></div></div>
     <div class="contact-item"><div class="contact-icon">☎</div><div><div class="contact-type">Phone</div><div class="contact-value">18059239170</div></div></div>
   </div>
 </section>
@@ -692,7 +658,12 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
   <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
 </div>
 
-<script>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="event.stopPropagation();closeLightbox()">↩</button>
+  <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
@@ -743,14 +714,13 @@ function toggleXhs(id){
   document.querySelectorAll('.xhs-acc.open').forEach(a=>a.classList.remove('open'));
   if(!isOpen) el.classList.add('open');
 }
-function flipAccCard(id) {
-  const flipper = document.getElementById('flipper-' + id);
-  const acc = flipper.closest('.xhs-acc');
-  const isFlipped = flipper.classList.contains('flipped');
-  if (!isFlipped) {
-    // Collapse the accordion first, wait for it to close, then flip
+function flipAccCard(id){
+  const flipper=document.getElementById('flipper-'+id);
+  const acc=flipper.closest('.xhs-acc');
+  const isFlipped=flipper.classList.contains('flipped');
+  if(!isFlipped){
     acc.classList.remove('open');
-    setTimeout(() => { flipper.classList.add('flipped'); }, 350);
+    setTimeout(()=>{ flipper.classList.add('flipped'); },350);
   } else {
     flipper.classList.remove('flipped');
   }
