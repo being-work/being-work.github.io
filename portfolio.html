@@ -282,18 +282,19 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
   .photo-item img { min-height:200px; }
   .contact { padding:60px 24px; }
   footer { padding:20px 24px;flex-direction:column;gap:8px;text-align:center; }
-  /* Mobile fixes */
+  /* XHS: single column */
   .xhs-accounts-new { grid-template-columns:1fr; }
-  .xhs-acc-name { font-size:16px;white-space:normal;display:flex;align-items:center;gap:8px;flex-wrap:wrap; }
-  .xhs-acc-header { padding:18px 18px;gap:10px; }
-  .xhs-acc-header > div:first-child { min-width:0;flex:1; }
+  .xhs-acc-header { padding:16px 18px; }
+  .xhs-acc-name { font-size:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;white-space:normal; }
   .xhs-acc-bio { white-space:normal;word-break:break-all; }
-  .acc-verify-btn { font-size:8px;padding:2px 7px; }
-  .exp-header { padding:20px 18px;display:flex;flex-direction:column;align-items:flex-start;gap:10px; }
-  .exp-company { font-size:15px;white-space:normal; }
-  .exp-right { width:100%;justify-content:space-between; }
-  .exp-body-inner { padding:18px 18px 22px; }
-  .exp-point { grid-template-columns:1fr;gap:8px; }
+  .acc-verify-btn { font-size:8px;padding:2px 8px; }
+  /* Experience: stack header vertically */
+  .exp-header { padding:18px 18px !important;display:flex !important;flex-direction:column !important;align-items:flex-start !important;gap:8px !important; }
+  .exp-company { font-size:15px;white-space:normal;word-break:keep-all; }
+  .exp-right { display:flex !important;flex-direction:row !important;align-items:center;justify-content:space-between;width:100%; }
+  .exp-body-inner { padding:16px 18px 20px; }
+  .exp-point { grid-template-columns:1fr;gap:6px; }
+  /* Skillmap: stack */
   .skillmap-row { grid-template-columns:1fr;gap:6px; }
   .skillmap-mid-cell { display:none; }
   .skillmap-col-header { grid-template-columns:1fr; }
