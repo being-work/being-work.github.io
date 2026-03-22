@@ -44,9 +44,9 @@ nav.scrolled { box-shadow:0 2px 24px rgba(30,45,90,0.1); }
 .nav-links a:hover { color:var(--gold); }
 
 /* HERO */
-.hero { min-height:100vh;background:var(--navy-dark);display:grid;grid-template-columns:1.1fr 1fr;position:relative;overflow:hidden; }
+.hero { min-height:30vh;background:var(--navy-dark);display:grid;grid-template-columns:1.1fr 1fr;position:relative;overflow:hidden; }
 .hero::after { content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(-50deg,transparent,transparent 60px,rgba(196,150,42,0.04) 60px,rgba(196,150,42,0.04) 61px);pointer-events:none; }
-.hero-left { display:flex;flex-direction:column;justify-content:flex-end;padding:120px 64px 80px;position:relative;z-index:2; }
+.hero-left { display:flex;flex-direction:column;justify-content:flex-end;padding:80px 64px 40px;position:relative;z-index:2; }
 .hero-eyebrow { font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.3em;color:var(--gold-light);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp 0.7s 0.3s forwards; }
 .hero-name { font-family:'Playfair Display',serif;font-size:clamp(54px,6vw,92px);font-weight:700;line-height:1.0;color:var(--text-on-dark);letter-spacing:-0.02em;opacity:0;animation:fadeUp 0.7s 0.5s forwards; }
 .hero-name-en { font-family:'Playfair Display',serif;font-size:clamp(18px,2.2vw,28px);font-style:italic;font-weight:400;color:var(--gold);margin-top:10px;opacity:0;animation:fadeUp 0.7s 0.65s forwards; }
@@ -64,12 +64,13 @@ nav.scrolled { box-shadow:0 2px 24px rgba(30,45,90,0.1); }
 .hero-stat-label { font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--text-on-dark-sub);margin-top:6px;text-transform:uppercase; }
 
 /* SECTION BASE */
-.section { padding:100px 60px;opacity:0;transform:translateY(22px);transition:opacity 0.75s,transform 0.75s; }
+.section { padding:60px 60px 100px;opacity:1;transform:translateY(22px);transition:opacity 0.75s,transform 0.75s; }
 .section.visible { opacity:1;transform:translateY(0); }
 .section-label { font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:14px; }
 .section-label::before { content:'';display:block;width:28px;height:1px;background:var(--gold); }
-.section-title { font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,50px);font-weight:700;color:var(--navy);line-height:1.1;letter-spacing:-0.01em;margin-bottom:56px; }
-.section-title.light { color:var(--text-on-dark); }
+.section-title { font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,50px);font-weight:700;color:#0D1B3E;line-height:1.1;letter-spacing:-0.01em;margin-bottom:56px; }
+.skillmap .section-title, .portfolio .section-title, .practice .section-title { color:#EDE9E1 !important; }
+.xhs .section-title, .experience .section-title { color:#0D1B3E !important; }
 
 /* ABOUT */
 .about { background:var(--bg); }
@@ -103,25 +104,60 @@ nav.scrolled { box-shadow:0 2px 24px rgba(30,45,90,0.1); }
 .gallery-row { display:flex;gap:10px;width:max-content; }
 .gallery-item { flex-shrink:0;width:256px;overflow:hidden;position:relative;cursor:pointer;border:1px solid rgba(196,150,42,0.15);transition:border-color 0.3s; }
 .gallery-item:hover { border-color:var(--gold); }
-.gallery-item img { width:100%;height:144px;object-fit:cover;display:block;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1),filter 0.3s;filter:saturate(0.88) brightness(0.97); }
-.gallery-item:hover img { transform:scale(1.06);filter:saturate(1.1) brightness(1.0); }
+.gallery-item img { width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1),filter 0.3s;filter:saturate(0.88) brightness(0.97); }
+.gallery-item:hover img { transform:scale(1.04);filter:saturate(1.1) brightness(1.0); }
 .gallery-overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(20,31,62,0.82),transparent 55%);opacity:0;transition:opacity 0.3s;display:flex;align-items:flex-end;padding:10px 12px; }
 .gallery-item:hover .gallery-overlay { opacity:1; }
 .gallery-overlay span { font-size:12px;color:var(--text-on-dark);font-family:'Noto Serif SC',serif; }
 
-.poster-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:10px; }
-.poster-item { overflow:hidden;cursor:pointer;border:1px solid rgba(196,150,42,0.15);transition:border-color 0.3s; }
-.poster-item:hover { border-color:var(--gold); }
-.poster-item img { width:100%;display:block;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1),filter 0.3s;filter:saturate(0.88); }
-.poster-item:hover img { transform:scale(1.04);filter:saturate(1.1); }
+/* Focus Carousel */
+.focus-carousel-wrap { position:relative;overflow:hidden;padding:28px 0; }
+.focus-carousel { display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 calc(50% - 130px);align-items:center;cursor:grab; }
+.focus-carousel::-webkit-scrollbar { display:none; }
+.fc-item { flex-shrink:0;cursor:pointer;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1),opacity 0.4s;border:1px solid rgba(196,150,42,0.15);overflow:hidden;opacity:0.45;transform:scale(0.78); }
+.fc-item img { display:block;width:100%;height:auto; }
+.fc-item.poster-fc { width:200px; }
+.fc-item.photo-fc { width:260px; }
 
-.photo-grid { display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 280px;gap:10px; }
-.photo-item { overflow:hidden;position:relative;cursor:pointer; }
-.photo-item:first-child { grid-row:1/3; }
-.photo-item img { width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1),filter 0.3s;filter:saturate(0.88) brightness(0.96); }
-.photo-item:hover img { transform:scale(1.04);filter:saturate(1.0) brightness(1.0); }
-.photo-label { position:absolute;bottom:0;left:0;right:0;padding:10px 14px;background:linear-gradient(to top,rgba(20,31,62,0.75),transparent);font-family:'DM Mono',monospace;font-size:10px;color:var(--text-on-dark);letter-spacing:0.1em;opacity:0;transition:opacity 0.3s; }
-.photo-item:hover .photo-label { opacity:1; }
+/* Skill map */
+.skillmap { background:var(--navy-dark);padding-bottom:80px; }
+.skillmap .section-label { color:var(--gold-light); }
+.skillmap .section-label::before { background:var(--gold-light); }
+.skillmap .section-title { color:var(--text-on-dark); }
+.skillmap-grid { display:flex;flex-direction:column;gap:8px; }
+.skillmap-row { display:grid;grid-template-columns:1fr 52px 1fr;gap:0;align-items:center; }
+.skillmap-col-header { font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--text-on-dark-muted);text-transform:uppercase;padding:0 14px 12px;border-bottom:1px solid rgba(196,150,42,0.2);margin-bottom:8px;display:grid;grid-template-columns:1fr 52px 1fr;gap:0; }
+.skillmap-col-header .hdr-mid { display:flex;align-items:center;justify-content:center; }
+.skill-l { background:rgba(240,237,232,0.06);border:1px solid rgba(196,150,42,0.15);border-radius:10px;padding:12px 16px; }
+.skill-l-title { font-size:13px;font-weight:600;color:var(--text-on-dark);margin-bottom:2px; }
+.skill-l-sub { font-size:12px;color:var(--text-on-dark-muted); }
+.skill-r { background:rgba(30,45,90,0.5);border:1px solid rgba(196,150,42,0.2);border-radius:10px;padding:12px 16px; }
+.skill-r-title { font-size:13px;font-weight:600;color:var(--gold-light);margin-bottom:2px; }
+.skill-r-sub { font-size:12px;color:var(--text-on-dark-sub); }
+.skillmap-mid-cell { display:flex;align-items:center;justify-content:center; }
+.skillmap-arrow { width:26px;height:26px;border-radius:50%;border:1px solid rgba(196,150,42,0.3);background:rgba(196,150,42,0.1);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gold); }
+
+/* XHS redesign */
+.xhs-accounts-new { display:grid;grid-template-columns:repeat(3,1fr);gap:2px; }
+.xhs-acc { background:var(--navy);border:1px solid rgba(196,150,42,0.15);overflow:hidden; }
+.xhs-acc-header { padding:22px 26px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background 0.2s; }
+.xhs-acc-header:hover { background:var(--navy-dark); }
+.xhs-acc-name { font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text-on-dark); }
+.xhs-acc-bio { font-family:'DM Mono',monospace;font-size:10px;color:var(--text-on-dark-muted);letter-spacing:0.08em;margin-top:3px; }
+.xhs-acc-toggle { width:22px;height:22px;border:1px solid rgba(196,150,42,0.3);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--text-on-dark-muted);transition:transform 0.4s,background 0.3s,color 0.3s;flex-shrink:0; }
+.xhs-acc.open .xhs-acc-toggle { transform:rotate(45deg);background:var(--gold);color:var(--navy-dark);border-color:var(--gold); }
+.xhs-acc-body { max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1); }
+.xhs-acc.open .xhs-acc-body { max-height:800px; }
+.xhs-acc-inner { border-top:1px solid rgba(196,150,42,0.15);padding:20px 26px; }
+.xhs-post-cards { display:flex;flex-direction:column;gap:10px; }
+.xhs-post-card { background:rgba(240,237,232,0.05);border:1px solid rgba(196,150,42,0.12);border-radius:8px;padding:14px 16px; }
+.xhs-post-card-title { font-size:13px;font-weight:600;color:var(--text-on-dark);margin-bottom:10px;line-height:1.5; }
+.xhs-post-card-metrics { display:flex;gap:20px;align-items:center;flex-wrap:wrap; }
+.xhs-m { display:flex;flex-direction:column;gap:2px; }
+.xhs-m-val { font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1; }
+.xhs-m-key { font-family:'DM Mono',monospace;font-size:10px;color:var(--text-on-dark-muted);letter-spacing:0.08em;text-transform:uppercase; }
+.xhs-src-btn { font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;color:var(--text-on-dark-muted);border:1px solid rgba(196,150,42,0.25);background:transparent;padding:5px 12px;cursor:pointer;margin-left:auto;transition:border-color 0.2s,color 0.2s; }
+.xhs-src-btn:hover { border-color:var(--gold);color:var(--gold); }
 
 /* XHS */
 .xhs { background:var(--bg-dark); }
@@ -232,6 +268,7 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
   <div class="nav-name">谢冰莹</div>
   <ul class="nav-links">
     <li><a href="#portfolio">作品集</a></li>
+    <li><a href="#skillmap">技能转化</a></li>
     <li><a href="#xhs">小红书</a></li>
     <li><a href="#experience">实习经历</a></li>
     <li><a href="#practice">实践经历</a></li>
@@ -242,21 +279,18 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-eyebrow">流程运营专员 · 2026届春季校招</p>
+    <p class="hero-eyebrow">2026届春季校招</p>
     <h1 class="hero-name">谢冰莹</h1>
-    <p class="hero-name-en">Xie Bingying</p>
     <div class="hero-divider"></div>
     <div class="hero-tags">
-      <span class="hero-tag">内容运营</span>
-      <span class="hero-tag">流程设计</span>
+      <span class="hero-tag">小红书运营</span>
+      <span class="hero-tag">公众号运营</span>
       <span class="hero-tag">海报设计</span>
       <span class="hero-tag">会务统筹</span>
-      <span class="hero-tag">法学背景</span>
     </div>
     <div class="hero-contact">
       <div class="hero-contact-item"><span class="label">✉</span> xiebingyingbh@163.com</div>
       <div class="hero-contact-item"><span class="label">☎</span> 18059239170</div>
-      <div class="hero-contact-item"><span class="label">◉</span> 北京航空航天大学 · 法学院</div>
     </div>
   </div>
   <div class="hero-right">
@@ -269,24 +303,7 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section about" id="about">
-  <div class="section-label">About</div>
-  <h2 class="section-title">法学 × 运营</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>北航法学院背景，持有<strong>国家法律职业资格证</strong>与 CET-6。三段实习经历横跨品牌运营、科技法务与法规数据处理，形成了<strong>内容运营 + 流程设计</strong>的复合能力。</p>
-      <p>擅长从 0 到 1 独立完成内容产品全流程：从选题分析、海报设计、内容发布，到数据复盘与迭代。同时具备 <strong>SOP 撰写</strong>与跨部门协同推进的实践经验，在学术会务统筹中磨炼了全流程项目管理能力。</p>
-      <p>在小红书多个账号上保持创作，深度理解平台推荐逻辑，多条内容进入<strong>爆款量级</strong>（单条最高 28 万浏览）。</p>
-    </div>
-    <div class="about-skills">
-      <div class="skill-card"><div class="skill-icon">✦</div><div class="skill-name">内容运营</div><div class="skill-desc">小红书/抖音/公众号全平台，熟悉推荐算法与风控规则</div></div>
-      <div class="skill-card"><div class="skill-icon">◈</div><div class="skill-name">流程设计</div><div class="skill-desc">SOP 撰写、流程图设计、标准化文档产出</div></div>
-      <div class="skill-card"><div class="skill-icon">◇</div><div class="skill-name">视觉设计</div><div class="skill-desc">海报、公众号排版、会议手册，Canva / 稿定熟练</div></div>
-      <div class="skill-card"><div class="skill-icon">⊕</div><div class="skill-name">项目统筹</div><div class="skill-desc">10+ 场学术会务全流程执行，多部门协调对接</div></div>
-    </div>
-  </div>
-</section>
+
 
 <!-- PORTFOLIO -->
 <section class="section portfolio" id="portfolio">
@@ -299,7 +316,7 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
   </div>
 
   <div class="portfolio-panel active" id="tab-covers">
-    <p class="panel-desc">「洪先生说」公众号 · 独立运营 · 22篇 · 累计阅读量 12,000 · 左右拖动浏览全部封面</p>
+    <p class="panel-desc">学术公众号「崑崙学社」· 独立运营 · 22篇 · 累计阅读量 12,000 · 左右拖动浏览全部封面</p>
     <div class="gallery-scroll-wrap"><div class="gallery-row">
       <div class="gallery-item" onclick="openLightbox('公众号封面1.jpg')"><img src="公众号封面1.jpg" alt="" loading="lazy"><div class="gallery-overlay"><span>布兰代斯大法官先生</span></div></div>
       <div class="gallery-item" onclick="openLightbox('公众号封面2.jpg')"><img src="公众号封面2.jpg" alt="" loading="lazy"><div class="gallery-overlay"><span>战时的新闻自由</span></div></div>
@@ -327,47 +344,140 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
   </div>
 
   <div class="portfolio-panel" id="tab-posters">
-    <p class="panel-desc">北航法学院学术讲座 & 行政法新思沙龙系列海报 · 点击查看大图</p>
-    <div class="poster-grid">
-      <div class="poster-item" onclick="openLightbox('讲座海报1.jpg')"><img src="讲座海报1.jpg" alt="" loading="lazy"></div>
-      <div class="poster-item" onclick="openLightbox('讲座海报2.jpg')"><img src="讲座海报2.jpg" alt="" loading="lazy"></div>
-      <div class="poster-item" onclick="openLightbox('讲座海报3.jpg')"><img src="讲座海报3.jpg" alt="" loading="lazy"></div>
-      <div class="poster-item" onclick="openLightbox('讲座海报4.jpg')"><img src="讲座海报4.jpg" alt="" loading="lazy"></div>
-      <div class="poster-item" onclick="openLightbox('讲座海报5.jpg')"><img src="讲座海报5.jpg" alt="" loading="lazy"></div>
-      <div class="poster-item" onclick="openLightbox('沙龙海报1.jpg')"><img src="沙龙海报1.jpg" alt="" loading="lazy"></div>
-      <div class="poster-item" onclick="openLightbox('沙龙海报2.jpg')"><img src="沙龙海报2.jpg" alt="" loading="lazy"></div>
-      <div class="poster-item" onclick="openLightbox('沙龙海报3.jpg')"><img src="沙龙海报3.jpg" alt="" loading="lazy"></div>
+    <p class="panel-desc">北航法学院学术讲座 & 行政法新思沙龙系列海报 · 左右滑动 · 点击查看大图</p>
+    <div class="focus-carousel-wrap">
+      <div class="focus-carousel" id="posterCarousel">
+        <div class="fc-item poster-fc" onclick="openLightbox('讲座海报1.jpg')"><img src="讲座海报1.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item poster-fc" onclick="openLightbox('讲座海报2.jpg')"><img src="讲座海报2.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item poster-fc" onclick="openLightbox('讲座海报3.jpg')"><img src="讲座海报3.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item poster-fc" onclick="openLightbox('讲座海报4.jpg')"><img src="讲座海报4.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item poster-fc" onclick="openLightbox('讲座海报5.jpg')"><img src="讲座海报5.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item poster-fc" onclick="openLightbox('沙龙海报1.jpg')"><img src="沙龙海报1.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item poster-fc" onclick="openLightbox('沙龙海报2.jpg')"><img src="沙龙海报2.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item poster-fc" onclick="openLightbox('沙龙海报3.jpg')"><img src="沙龙海报3.jpg" loading="lazy" alt=""></div>
+      </div>
     </div>
   </div>
 
   <div class="portfolio-panel" id="tab-photos">
-    <p class="panel-desc">北航法律思维讲堂 · 会务摄影 · 2023 · 点击查看大图</p>
-    <div class="photo-grid">
-      <div class="photo-item" onclick="openLightbox('会场照片.jpg')"><img src="会场照片.jpg" alt="" loading="lazy"><div class="photo-label">会场全景 · 2023/04/26</div></div>
-      <div class="photo-item" onclick="openLightbox('个人照片1.jpg')"><img src="个人照片1.jpg" alt="" loading="lazy"><div class="photo-label">2023/03/29</div></div>
-      <div class="photo-item" onclick="openLightbox('个人照片2.jpg')"><img src="个人照片2.jpg" alt="" loading="lazy"><div class="photo-label">2023/04/26</div></div>
-      <div class="photo-item" onclick="openLightbox('个人照片3.jpg')"><img src="个人照片3.jpg" alt="" loading="lazy"><div class="photo-label">2023/04/26</div></div>
-      <div class="photo-item" onclick="openLightbox('个人照片4.jpg')"><img src="个人照片4.jpg" alt="" loading="lazy"><div class="photo-label">2023/04/26</div></div>
-      <div class="photo-item" onclick="openLightbox('个人照片5.jpg')"><img src="个人照片5.jpg" alt="" loading="lazy"><div class="photo-label">2023/04/26</div></div>
-      <div class="photo-item" onclick="openLightbox('个人照片6.jpg')"><img src="个人照片6.jpg" alt="" loading="lazy"><div class="photo-label">2023/04/26</div></div>
+    <p class="panel-desc">北航法律思维讲堂 · 会务摄影作品节选 · 点击查看大图</p>
+    <div class="focus-carousel-wrap">
+      <div class="focus-carousel" id="photoCarousel">
+        <div class="fc-item photo-fc" onclick="openLightbox('会场照片.jpg')"><img src="会场照片.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item photo-fc" onclick="openLightbox('个人照片1.jpg')"><img src="个人照片1.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item photo-fc" onclick="openLightbox('个人照片2.jpg')"><img src="个人照片2.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item photo-fc" onclick="openLightbox('个人照片3.jpg')"><img src="个人照片3.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item photo-fc" onclick="openLightbox('个人照片4.jpg')"><img src="个人照片4.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item photo-fc" onclick="openLightbox('个人照片5.jpg')"><img src="个人照片5.jpg" loading="lazy" alt=""></div>
+        <div class="fc-item photo-fc" onclick="openLightbox('个人照片6.jpg')"><img src="个人照片6.jpg" loading="lazy" alt=""></div>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- SKILL MAP -->
+<section class="section skillmap" id="skillmap">
+  <div class="section-label">Skill Transfer</div>
+  <h2 class="section-title">法学训练 → 运营能力</h2>
+  <div class="skillmap-grid">
+    <div class="skillmap-col-header"><span>法学训练</span><span class="hdr-mid"></span><span>运营能力</span></div>
+    <div class="skillmap-row"><div class="skill-l"><div class="skill-l-title">案例分析</div><div class="skill-l-sub">提炼核心争议点</div></div><div class="skillmap-mid-cell"><div class="skillmap-arrow">→</div></div><div class="skill-r"><div class="skill-r-title">选题判断</div><div class="skill-r-sub">抓住用户关注点</div></div></div>
+    <div class="skillmap-row"><div class="skill-l"><div class="skill-l-title">法律文书写作</div><div class="skill-l-sub">严谨、有说服力的表达</div></div><div class="skillmap-mid-cell"><div class="skillmap-arrow">→</div></div><div class="skill-r"><div class="skill-r-title">内容写作</div><div class="skill-r-sub">逻辑清晰、打动用户</div></div></div>
+    <div class="skillmap-row"><div class="skill-l"><div class="skill-l-title">条文解析</div><div class="skill-l-sub">结构化拆解复杂信息</div></div><div class="skillmap-mid-cell"><div class="skillmap-arrow">→</div></div><div class="skill-r"><div class="skill-r-title">内容框架设计</div><div class="skill-r-sub">把复杂信息变成易读内容</div></div></div>
+    <div class="skillmap-row"><div class="skill-l"><div class="skill-l-title">调研报告撰写</div><div class="skill-l-sub">系统整合与信息输出</div></div><div class="skillmap-mid-cell"><div class="skillmap-arrow">→</div></div><div class="skill-r"><div class="skill-r-title">行业洞察</div><div class="skill-r-sub">选题策划与数据分析</div></div></div>
+    <div class="skillmap-row"><div class="skill-l"><div class="skill-l-title">合规审查</div><div class="skill-l-sub">熟悉规则与边界</div></div><div class="skillmap-mid-cell"><div class="skillmap-arrow">→</div></div><div class="skill-r"><div class="skill-r-title">平台运营</div><div class="skill-r-sub">理解推荐机制与风控规则</div></div></div>
+    <div class="skillmap-row"><div class="skill-l"><div class="skill-l-title">SOP / 流程文书</div><div class="skill-l-sub">标准化流程设计</div></div><div class="skillmap-mid-cell"><div class="skillmap-arrow">→</div></div><div class="skill-r"><div class="skill-r-title">运营标准化</div><div class="skill-r-sub">建立可复用的内容生产流程</div></div></div>
+    <div style="height:60px;"></div>
+  </div>
 
 <!-- XHS -->
 <section class="section xhs" id="xhs">
   <div class="section-label">Social Media</div>
   <h2 class="section-title">小红书运营数据</h2>
-  <p class="xhs-intro">运营两个个人账号，深度理解平台推荐机制与用户心理，多条内容达到爆款量级。协助朋友发布的单条内容获 4.2 万浏览，证明对<strong>选题逻辑</strong>的把握超越账号粉丝基数。</p>
-  <div class="xhs-accounts">
-    <div class="xhs-account"><div class="xhs-account-name">Being</div><div class="xhs-account-bio">个人成长感悟</div><div class="xhs-stat-row"><div class="xhs-stat"><div class="xhs-stat-val">675</div><div class="xhs-stat-key">粉丝</div></div><div class="xhs-stat"><div class="xhs-stat-val">2.1万</div><div class="xhs-stat-key">获赞收藏</div></div></div></div>
-    <div class="xhs-account"><div class="xhs-account-name">一团浆糊</div><div class="xhs-account-bio">读研经验分享</div><div class="xhs-stat-row"><div class="xhs-stat"><div class="xhs-stat-val">63</div><div class="xhs-stat-key">粉丝</div></div><div class="xhs-stat"><div class="xhs-stat-val">2.9万</div><div class="xhs-stat-key">获赞收藏</div></div></div></div>
-    <div class="xhs-account"><div class="xhs-account-name">协助发布</div><div class="xhs-account-bio">朋友账号 · 单条内容</div><div class="xhs-stat-row"><div class="xhs-stat"><div class="xhs-stat-val">4.2万</div><div class="xhs-stat-key">浏览</div></div><div class="xhs-stat"><div class="xhs-stat-val">1,979</div><div class="xhs-stat-key">点赞</div></div></div></div>
-  </div>
-  <div class="xhs-posts">
-    <div class="xhs-post"><div class="xhs-post-badge">爆款</div><div class="xhs-post-title">研究生你记住了</div><div class="xhs-post-metrics"><div class="xhs-metric"><span class="xhs-metric-icon">👁</span><span class="xhs-metric-val hi">287,093</span></div><div class="xhs-metric"><span class="xhs-metric-icon">❤️</span><span class="xhs-metric-val">19,581</span></div><div class="xhs-metric"><span class="xhs-metric-icon">⭐</span><span class="xhs-metric-val">8,998</span></div><div class="xhs-metric"><span class="xhs-metric-icon">↗</span><span class="xhs-metric-val">2,734</span></div></div></div>
-    <div class="xhs-post"><div class="xhs-post-badge">热门</div><div class="xhs-post-title">导师骂人真的很有水平</div><div class="xhs-post-metrics"><div class="xhs-metric"><span class="xhs-metric-icon">👁</span><span class="xhs-metric-val hi">95,370</span></div><div class="xhs-metric"><span class="xhs-metric-icon">❤️</span><span class="xhs-metric-val">8,598</span></div><div class="xhs-metric"><span class="xhs-metric-icon">⭐</span><span class="xhs-metric-val">3,665</span></div></div></div>
-    <div class="xhs-post"><div class="xhs-post-title">这是躲在我短发下三年的耳机兼mp3</div><div class="xhs-post-metrics"><div class="xhs-metric"><span class="xhs-metric-icon">👁</span><span class="xhs-metric-val hi">31,291</span></div><div class="xhs-metric"><span class="xhs-metric-icon">❤️</span><span class="xhs-metric-val">2,817</span></div><div class="xhs-metric"><span class="xhs-metric-icon">⭐</span><span class="xhs-metric-val">937</span></div></div></div>
+  <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-on-light-muted);letter-spacing:0.1em;margin-top:-40px;margin-bottom:36px;">点击账号名称展开 · 查看详细数据</p>
+  <div class="xhs-accounts-new">
+
+    <div class="xhs-acc" id="acc-being">
+      <div class="xhs-acc-header" onclick="toggleXhs('acc-being')">
+        <div><div class="xhs-acc-name">Being</div><div class="xhs-acc-bio">个人成长感悟 · 675粉丝 · 2.1万获赞收藏</div></div>
+        <div class="xhs-acc-toggle">+</div>
+      </div>
+      <div class="xhs-acc-body"><div class="xhs-acc-inner">
+        <div class="xhs-post-cards">
+          <div class="xhs-post-card">
+            <div class="xhs-post-card-title">导师骂人真的很有水平</div>
+            <div class="xhs-post-card-metrics">
+              <div class="xhs-m"><div class="xhs-m-val">95,370</div><div class="xhs-m-key">👁 浏览</div></div>
+              <div class="xhs-m"><div class="xhs-m-val">12,263</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号1-数据1.png')">查看数据来源</button>
+            </div>
+          </div>
+          <div class="xhs-post-card">
+            <div class="xhs-post-card-title">宝宝，其实你一直都有一种不安感</div>
+            <div class="xhs-post-card-metrics">
+              <div class="xhs-m"><div class="xhs-m-val">14,433</div><div class="xhs-m-key">👁 浏览</div></div>
+              <div class="xhs-m"><div class="xhs-m-val">3,698</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号1-数据2.png')">查看数据来源</button>
+            </div>
+          </div>
+          <div class="xhs-post-card">
+            <div class="xhs-post-card-title">这是躲在我短发下三年的耳机兼mp3</div>
+            <div class="xhs-post-card-metrics">
+              <div class="xhs-m"><div class="xhs-m-val">31,291</div><div class="xhs-m-key">👁 浏览</div></div>
+              <div class="xhs-m"><div class="xhs-m-val">3,754</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号1-数据3.png')">查看数据来源</button>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="xhs-acc" id="acc-yituan">
+      <div class="xhs-acc-header" onclick="toggleXhs('acc-yituan')">
+        <div><div class="xhs-acc-name">一团浆糊</div><div class="xhs-acc-bio">读研经验分享 · 63粉丝 · 2.9万获赞收藏</div></div>
+        <div class="xhs-acc-toggle">+</div>
+      </div>
+      <div class="xhs-acc-body"><div class="xhs-acc-inner">
+        <div class="xhs-post-cards">
+          <div class="xhs-post-card">
+            <div class="xhs-post-card-title">研究生你记住了</div>
+            <div class="xhs-post-card-metrics">
+              <div class="xhs-m"><div class="xhs-m-val">287,093</div><div class="xhs-m-key">👁 浏览</div></div>
+              <div class="xhs-m"><div class="xhs-m-val">28,579</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号2-数据2.png')">查看数据来源</button>
+            </div>
+          </div>
+          <div class="xhs-post-card">
+            <div class="xhs-post-card-title">不会约时间的研究生看过来</div>
+            <div class="xhs-post-card-metrics">
+              <div class="xhs-m"><div class="xhs-m-val">16,991</div><div class="xhs-m-key">👁 浏览</div></div>
+              <div class="xhs-m"><div class="xhs-m-val">251</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号2-数据1.png')">查看数据来源</button>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="xhs-acc" id="acc-friend">
+      <div class="xhs-acc-header" onclick="toggleXhs('acc-friend')">
+        <div><div class="xhs-acc-name">协助发布</div><div class="xhs-acc-bio">朋友账号 · 单条内容</div></div>
+        <div class="xhs-acc-toggle">+</div>
+      </div>
+      <div class="xhs-acc-body"><div class="xhs-acc-inner">
+        <div class="xhs-post-cards">
+          <div class="xhs-post-card">
+            <div class="xhs-post-card-title">米哈游哑巴不许做游戏</div>
+            <div class="xhs-post-card-metrics">
+              <div class="xhs-m"><div class="xhs-m-val">42,519</div><div class="xhs-m-key">👁 浏览</div></div>
+              <div class="xhs-m"><div class="xhs-m-val">2,068</div><div class="xhs-m-key">⭐ 获赞收藏</div></div>
+              <button class="xhs-src-btn" onclick="event.stopPropagation();openLightbox('小红书号3-单条数据.png')">查看数据来源</button>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
   </div>
 </section>
 
@@ -388,11 +498,11 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
       <div class="exp-body"><div class="exp-body-inner">
         <div class="exp-point"><span class="exp-tag">行业调研</span><p class="exp-text">持续追踪 AI 音乐、AI 绘画、游戏等新兴领域动态，独立撰写近 20 份行业调研报告，定期汇总行业资讯并结构化输出，为业务决策提供信息支持。</p></div>
         <div class="exp-point"><span class="exp-tag">合同流程</span><p class="exp-text">负责 300 余份合同归档整理与盖章，对接业务、财务、人事等各部门，协助统计合同台账。</p></div>
-        <div class="exp-point"><span class="exp-tag">合规支持</span><p class="exp-text">协助维护集团旗下 10 余家海内外子公司治理，支持合规管理工作，审核公司决议等法律文件。</p></div>
+        <div class="exp-point"><span class="exp-tag">合规支持</span><p class="exp-text">协助维护集团 10 余家海内外子公司治理，支持各子公司合规管理、审核公司决议等法律文件。</p></div>
       </div></div>
     </div>
     <div class="exp-item" onclick="toggleExp(this)">
-      <div class="exp-header"><div><div class="exp-company">北大英华科技有限公司（产品中心）</div><div class="exp-role">实习生</div></div><div class="exp-right"><div class="exp-period">2023.07 — 2023.09</div><div class="exp-toggle">+</div></div></div>
+      <div class="exp-header"><div><div class="exp-company">北大英华科技有限公司</div><div class="exp-role">产品中心实习生</div></div><div class="exp-right"><div class="exp-period">2023.07 — 2023.09</div><div class="exp-toggle">+</div></div></div>
       <div class="exp-body"><div class="exp-body-inner">
         <div class="exp-point"><span class="exp-tag">法规梳理</span><p class="exp-text">对 40 余部法律法规中的行政事项进行系统梳理，逐条拆分违法行为构成要件，关联对应的处罚依据与法律后果，建立「违法行为—法律责任」结构化对应关系。</p></div>
         <div class="exp-point"><span class="exp-tag">数据标注</span><p class="exp-text">依据统一字段规范，在公司数据库系统中对行政领域法律法规进行逐条标注录入，形成可供大数据模型训练使用的结构化数据集。</p></div>
@@ -406,28 +516,27 @@ footer { background:var(--navy);padding:24px 60px;display:flex;justify-content:s
   <div class="section-label">Projects</div>
   <h2 class="section-title light">实践经历</h2>
   <div class="practice-grid">
-    <div class="practice-card"><div class="practice-org">北航法学院</div><div class="practice-role">科研助理</div><div class="practice-period">2022.09 — 2023.07</div><ul class="practice-points"><li class="practice-point"><strong>公众号运营：</strong>独立运营「洪先生说」公众号，从 0 到 1 发布内容 22 篇，累计阅读量 12,000，粉丝近 1,000 人。</li><li class="practice-point"><strong>会务宣传：</strong>统筹 10 余场学术讲座，负责设计海报、发布推送、会中拍摄录音，会后整理录音材料、撰写综述与宣传稿；大型会议另负责设计宣传单及会议手册。</li><li class="practice-point"><strong>流程统筹：</strong>会前联络主讲老师及外校参会者，统筹入校手续与餐饮安排；会中担任主持人；会后办理费用报销。</li></ul></div>
-    <div class="practice-card"><div class="practice-org">中央网信办</div><div class="practice-role">《网络执法效能综合评价》课题组成员</div><div class="practice-period">2023.06 — 2024.11</div><ul class="practice-points"><li class="practice-point"><strong>标准化手册编写：</strong>独立编写标准化执法手册，涵盖执法事项清单、流程图及文书模板，全文共 12 万余字。</li><li class="practice-point"><strong>专题研究报告：</strong>独立撰写行政管辖权问题研究报告（近 2 万字），协助推进四化专题研究。</li></ul></div>
-    <div class="practice-card"><div class="practice-org">中央网信办 · 西城区司法局</div><div class="practice-role">普法案例手册主要编写者</div><div class="practice-period">2023.06 — 2023.08</div><ul class="practice-points"><li class="practice-point"><strong>案例编写与成果落地：</strong>累计检索改编典型案例 60 余个，梳理案件事实与裁判逻辑进行深度分析；编写成果已印刷成册并投入普法工作使用。</li></ul></div>
-    <div class="practice-card"><div class="practice-org">北航 · 第三十一届冯如杯竞赛</div><div class="practice-role">哲社类一等奖第一名（1/137）</div><div class="practice-period">2021.03 — 2021.05</div><ul class="practice-points"><li class="practice-point"><strong>实证调研与成果产出：</strong>以第一作者身份基于 216 份有效问卷撰写调研报告（1.7 万字）及学术论文（1.1 万字），历经院级筛选，斩获校级哲社类一等奖第一名。</li></ul></div>
+    <div class="practice-card"><div class="practice-org">北航法学院宪法学与行政法学中心</div><div class="practice-role">科研助理</div><div class="practice-period">2022.09 — 2023.07</div><ul class="practice-points"><li class="practice-point"><strong>会务宣传与内容产出：</strong>负责学术讲座宣传全流程，包括设计海报、发布推送、会中拍摄录音，以及会后整理录音材料、撰写会议综述与宣传推送稿；大型会议另负责设计打印宣传单及会议手册。</li><li class="practice-point"><strong>会务流程统筹与现场执行：</strong>负责会前联络主讲老师及外校参会者、收集身份信息并协调入校手续，统筹餐饮安排；会中担任主持人，组织嘉宾发言、引导同学提问；会后办理费用报销。</li></ul></div>
+    <div class="practice-card"><div class="practice-org">中央网信办</div><div class="practice-role">《网络执法效能综合评价》课题组成员</div><div class="practice-period">2023.06 — 2024.11</div><ul class="practice-points"><li class="practice-point"><strong>标准化手册编写：</strong>独立编写标准化执法手册，涵盖执法事项清单、流程图及文书模板，手册共 12 万余字。</li><li class="practice-point"><strong>专题研究报告撰写：</strong>独立撰写行政管辖权问题研究报告 1 份（近 2 万字），协助进行四化问题研究。</li></ul></div>
+    <div class="practice-card"><div class="practice-org">中央网信办、西城区司法局</div><div class="practice-role">普法案例手册主要编写者</div><div class="practice-period">2023.06 — 2023.08</div><ul class="practice-points"><li class="practice-point"><strong>普法案例编写：</strong>累计检索改编典型案例 60 余个，梳理案件事实与裁判逻辑，运用相关法律知识进行深度分析；编写成果已印刷成册并投入普法工作使用。</li></ul></div>
+    <div class="practice-card"><div class="practice-org">北航 · 第三十一届冯如杯竞赛</div><div class="practice-role">哲社类一等奖第一名（1/137）· 一作</div><div class="practice-period">2021.03 — 2021.05</div><ul class="practice-points"><li class="practice-point"><strong>实证调研与竞赛成果：</strong>基于 216 份有效问卷撰写调研报告（1.7 万字），并完成相关学术论文《高校教育大数据中的信息权益问题——以"学生画像"中的法益平衡为例》（一作，1.1 万字）；项目历经院级校级层层筛选，斩获校级哲社类一等奖第一名（1/137）。</li></ul></div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div>
-    <div class="contact-title">期待与您合作</div>
-    <div class="contact-sub">流程运营专员 · 2026届春季校招 · 北京</div>
+    <div class="contact-title">期待加入</div>
+    <div class="contact-sub">2026届春季校招 · 北京</div>
   </div>
   <div class="contact-right">
     <div class="contact-item"><div class="contact-icon">✉</div><div><div class="contact-type">Email</div><div class="contact-value">xiebingyingbh@163.com</div></div></div>
     <div class="contact-item"><div class="contact-icon">☎</div><div><div class="contact-type">Phone</div><div class="contact-value">18059239170</div></div></div>
-    <div class="contact-item"><div class="contact-icon">◉</div><div><div class="contact-type">小红书</div><div class="contact-value">Being · 一团浆糊</div></div></div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-text">© 2026 谢冰莹 · 北京航空航天大学法学院</div>
+  <div class="footer-text">© 2026 谢冰莹</div>
   <div class="footer-text">Portfolio · Being</div>
 </footer>
 
@@ -441,7 +550,7 @@ const cursor=document.getElementById('cursor'),ring=document.getElementById('cur
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
 (function anim(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
-document.querySelectorAll('a,button,.portfolio-tab,.exp-item,.gallery-item,.poster-item,.photo-item,.xhs-post,.practice-card').forEach(el=>{
+document.querySelectorAll('a,button,.portfolio-tab,.exp-item,.gallery-item,.fc-item,.xhs-acc-header,.xhs-post-card,.practice-card,.skill-l,.skill-r').forEach(el=>{
   el.addEventListener('mouseenter',()=>{ring.style.width='50px';ring.style.height='50px';ring.style.borderColor='#E0B84A';});
   el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px';ring.style.borderColor='#C4962A';});
 });
@@ -449,7 +558,43 @@ window.addEventListener('scroll',()=>{document.getElementById('mainNav').classLi
 const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
 document.querySelectorAll('.section').forEach(s=>io.observe(s));
 function toggleExp(el){const o=el.classList.contains('open');document.querySelectorAll('.exp-item.open').forEach(i=>i.classList.remove('open'));if(!o)el.classList.add('open');}
-function switchTab(btn,id){document.querySelectorAll('.portfolio-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.portfolio-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(id).classList.add('active');}
+function switchTab(btn,id){
+  document.querySelectorAll('.portfolio-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.portfolio-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+  if(id==='tab-posters') setTimeout(()=>initCarousel('posterCarousel'),50);
+  if(id==='tab-photos') setTimeout(()=>initCarousel('photoCarousel'),50);
+}
+function initCarousel(id){
+  const c=document.getElementById(id);
+  if(!c||c._init) return;
+  c._init=true;
+  function update(){
+    const cw=c.offsetWidth,cl=c.scrollLeft,center=cl+cw/2;
+    c.querySelectorAll('.fc-item').forEach(item=>{
+      const ic=item.offsetLeft+item.offsetWidth/2;
+      const dist=Math.abs(center-ic);
+      const ratio=Math.max(0,1-dist/(cw*0.55));
+      item.style.transform=`scale(${0.78+ratio*0.28})`;
+      item.style.opacity=0.45+ratio*0.55;
+      item.style.borderColor=ratio>0.7?'#C4962A':'rgba(196,150,42,0.15)';
+    });
+  }
+  c.addEventListener('scroll',update,{passive:true});
+  setTimeout(update,100);
+  let down=false,sx=0,ss=0;
+  c.addEventListener('mousedown',e=>{down=true;sx=e.pageX-c.offsetLeft;ss=c.scrollLeft;c.style.cursor='grabbing';});
+  c.addEventListener('mouseleave',()=>{down=false;c.style.cursor='grab';});
+  c.addEventListener('mouseup',()=>{down=false;c.style.cursor='grab';});
+  c.addEventListener('mousemove',e=>{if(!down)return;e.preventDefault();c.scrollLeft=ss-(e.pageX-c.offsetLeft-sx);});
+}
+function toggleXhs(id){
+  const el=document.getElementById(id);
+  const isOpen=el.classList.contains('open');
+  document.querySelectorAll('.xhs-acc.open').forEach(a=>a.classList.remove('open'));
+  if(!isOpen) el.classList.add('open');
+}
 function openLightbox(src){document.getElementById('lightboxImg').src=src;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
